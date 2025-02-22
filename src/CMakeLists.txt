@@ -25,6 +25,7 @@ set(raylib_public_headers
     raylib.h
     rlgl.h
     raymath.h
+    raygui.h
     )
 
 # Sources to be compiled
@@ -36,6 +37,7 @@ set(raylib_sources
     rtext.c
     rtextures.c
     utils.c
+    raygui.c
     )
 
 # <root>/cmake/GlfwImport.cmake handles the details around the inclusion of glfw
@@ -90,7 +92,7 @@ if (BUILD_SHARED_LIBS)
     set_property(TARGET raylib PROPERTY C_VISIBILITY_PRESET hidden)
 endif ()
 
-target_link_libraries(raylib "${LIBS_PRIVATE}")
+target_link_libraries(raylib "${LIBS_PRIVATE}" Core)
 
 # Sets some compile time definitions for the pre-processor
 # If CUSTOMIZE_BUILD option is on you will not use config.h by default

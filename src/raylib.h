@@ -127,19 +127,21 @@
     #define RAD2DEG (180.0f/PI)
 #endif
 
+#include <Core/Memory.h>
+
 // Allow custom memory allocators
 // NOTE: Require recompiling raylib sources
 #ifndef RL_MALLOC
-    #define RL_MALLOC(sz)       malloc(sz)
+    #define RL_MALLOC(sz)       RaylibMalloc(sz)
 #endif
 #ifndef RL_CALLOC
-    #define RL_CALLOC(n,sz)     calloc(n,sz)
+    #define RL_CALLOC(n,sz)     RaylibCalloc(n,sz)
 #endif
 #ifndef RL_REALLOC
-    #define RL_REALLOC(ptr,sz)  realloc(ptr,sz)
+    #define RL_REALLOC(ptr,sz)  RaylibRealloc(ptr,sz)
 #endif
 #ifndef RL_FREE
-    #define RL_FREE(ptr)        free(ptr)
+    #define RL_FREE(ptr)        RaylibFree(ptr)
 #endif
 
 // NOTE: MSVC C++ compiler does not support compound literals (C99 feature)
