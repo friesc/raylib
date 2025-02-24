@@ -56,7 +56,7 @@ else ()
     MESSAGE(STATUS "Audio Backend: None (-DCUSTOMIZE_BUILD=ON -DSUPPORT_MODULE_RAUDIO=OFF)")
 endif ()
 
-add_library(raylib ${raylib_sources} ${raylib_public_headers})
+add_library(raylib SHARED ${raylib_sources} ${raylib_public_headers})
 
 if (NOT BUILD_SHARED_LIBS)
     MESSAGE(STATUS "Building raylib static library")
