@@ -58,16 +58,16 @@ endif ()
 
 add_library(raylib SHARED ${raylib_sources} ${raylib_public_headers})
 
-if (NOT BUILD_SHARED_LIBS)
-    MESSAGE(STATUS "Building raylib static library")
-    add_library(raylib_static ALIAS raylib)
-else()
+#if (NOT BUILD_SHARED_LIBS)
+#    MESSAGE(STATUS "Building raylib static library")
+#    add_library(raylib_static ALIAS raylib)
+#else()
     MESSAGE(STATUS "Building raylib shared library")
     target_compile_definitions(raylib
                                PRIVATE $<BUILD_INTERFACE:BUILD_LIBTYPE_SHARED>
                                INTERFACE $<INSTALL_INTERFACE:USE_LIBTYPE_SHARED>
                                )
-endif()
+#endif()
 
 if (${PLATFORM} MATCHES "Web")
     target_link_options(raylib PUBLIC "-sUSE_GLFW=3")
