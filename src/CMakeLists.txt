@@ -56,18 +56,19 @@ else ()
     MESSAGE(STATUS "Audio Backend: None (-DCUSTOMIZE_BUILD=ON -DSUPPORT_MODULE_RAUDIO=OFF)")
 endif ()
 
-add_library(raylib SHARED ${raylib_sources} ${raylib_public_headers})
 
-#if (NOT BUILD_SHARED_LIBS)
-#    MESSAGE(STATUS "Building raylib static library")
-#    add_library(raylib_static ALIAS raylib)
-#else()
+if (NOT ENABLE_HOTRELOAD)
+    MESSAGE(STATUS "Building raylib static library")
+    add_library(raylib STATIC ${raylib_sources} ${raylib_public_headers})
+    add_library(raylib_static ALIAS raylib)
+else()
     MESSAGE(STATUS "Building raylib shared library")
+    add_library(raylib SHARED ${raylib_sources} ${raylib_public_headers})
     target_compile_definitions(raylib
                                PRIVATE $<BUILD_INTERFACE:BUILD_LIBTYPE_SHARED>
                                INTERFACE $<INSTALL_INTERFACE:USE_LIBTYPE_SHARED>
                                )
-#endif()
+endif()
 
 if (${PLATFORM} MATCHES "Web")
     target_link_options(raylib PUBLIC "-sUSE_GLFW=3")
